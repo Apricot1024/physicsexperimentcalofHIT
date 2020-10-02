@@ -6,7 +6,7 @@ epsilon0 = 8.85 * (10 ** (-12))
 d = 0.318
 r = 25
 A = pi * (r ** 2)
-Rn = 0
+Rn = []
 fs = []
 fd = []
 epsilonr2 = []
@@ -26,64 +26,62 @@ j = j - 1
 
 # 收集函数
 def gettimes1():
-    global Rn
+    Rn.append(0)
     fd.append(input("请输入倍率（0.01，0.1，1，10）："))
     if fd[i] == "*0.01" or fd[i] == "0.01":
-        Rn = 1000000
+        Rn[i] = 1000000
     elif fd[i] == "*0.1" or fd[i] == "0.1":
-        Rn = 100000
+        Rn[i] = 100000
     elif fd[i] == "*1" or fd[i] == "1":
-        Rn = 10000
+        Rn[i] = 10000
     elif fd[i] == "*10" or fd[i] == "10":
-        Rn = 1000
+        Rn[i] = 1000
     else:
         print("您输入的倍率有误,请重新输入")
         gettimeswrong1()
 
 
 def gettimeswrong1():
-    global Rn
     fd[i] = input("请输入倍率（0.01，0.1，1，10）：")
     if fd[i] == "*0.01" or fd[i] == "0.01":
-        Rn = 1000000
+        Rn[i] = 1000000
     elif fd[i] == "*0.1" or fd[i] == "0.1":
-        Rn = 100000
+        Rn[i] = 100000
     elif fd[i] == "*1" or fd[i] == "1":
-        Rn = 10000
+        Rn[i] = 10000
     elif fd[i] == "*10" or fd[i] == "10":
-        Rn = 1000
+        Rn[i] = 1000
     else:
         print("您输入的倍率有误,请重新输入")
         gettimeswrong1()
 
 
 def gettimes2():
-    global Rn
+    Rn.append(0)
     fd.append(input("请输入倍率（0.01，0.1，1，10）："))
     if fd[i] == "*0.01" or fd[i] == "0.01":
-        Rn = 300000
+        Rn[i]=(300000)
     elif fd[i] == "*0.1" or fd[i] == "0.1":
-        Rn = 30000
+        Rn[i]=(30000)
     elif fd[i] == "*1" or fd[i] == "1":
-        Rn = 3000
+        Rn[i]=(3000)
     elif fd[i] == "*10" or fd[i] == "10":
-        Rn = 300
+        Rn[i]=(300)
     else:
         print("您输入的倍率有误,请重新输入")
         gettimeswrong2()
 
 
 def gettimeswrong2():
-    global Rn
     fd[i] = input("请输入倍率（0.01，0.1，1，10）：")
     if fd[i] == "*0.01" or fd[i] == "0.01":
-        Rn = 300000
+        Rn[i] = 300000
     elif fd[i] == "*0.1" or fd[i] == "0.1":
-        Rn = 30000
+        Rn[i] = 30000
     elif fd[i] == "*1" or fd[i] == "1":
-        Rn = 3000
+        Rn[i] = 3000
     elif fd[i] == "*10" or fd[i] == "10":
-        Rn = 300
+        Rn[i] = 300
     else:
         print("您输入的倍率有误,请重新输入")
         gettimeswrong2()
@@ -132,7 +130,7 @@ while i <= j:  # 收集j组数据
     getnumscollected()
 
     # 提示
-    print("第{}组数据收集已完成！".format(i+1))
+    print("第{}组数据收集已完成！".format(i + 1))
     print("将开始收集下一组数据")
     i = i + 1
 
@@ -144,22 +142,22 @@ while i <= j:
     print("以下是第{}组结果".format(i + 1))
 
     # 计算K
-    K.append(d / (A * Rn * ((Us1[i] ** 2) + (Us2[i] ** 2))))
-    print("K_{} = {}".format(i+1, K[i]))
+    K.append(d / (A * Rn[i] * ((Us1[i] ** 2) + (Us2[i] ** 2))))
+    print("K_{} = {}".format(i + 1, K[i]))
 
     # 计算epsilon
     epsilonr2.append((K[i] * (abs(Us1[i] * Uz1[i] - Us2[i] * Uz2[i]))) / (2 * pi * fs[i] * fd[i] * epsilon0))
     epsilonr1.append((K[i] * (Us2[i] * Uz1[i] + Us1[i] * Uz2[i])) / (2 * pi * fs[i] * fd[i] * epsilon0))
-    print("epsilonr1_{}={}".format(i+1, epsilonr1[i]))
-    print("epsilonr2_{}={}".format(i+1, epsilonr2[i]))
+    print("epsilonr1_{}={}".format(i + 1, epsilonr1[i]))
+    print("epsilonr2_{}={}".format(i + 1, epsilonr2[i]))
 
     # 计算tandelta
     tan_delta.append((abs(Us1[i] * Uz1[i] - Us2[i] * Uz2[i])) / (Us2[i] * Uz1[i] + Us1[i] * Uz2[i]))
-    print("tan_delta_{} = {}".format(i+1, tan_delta[i]))
+    print("tan_delta_{} = {}".format(i + 1, tan_delta[i]))
 
     # 计算ln(f)
     lnf.append(math.log(fs[i] * fd[i]))
-    print("ln(f)_{}={}".format(i+1, lnf[i]))
+    print("ln(f)_{}={}".format(i + 1, lnf[i]))
 
     # 提示
     i = i + 1
